@@ -5,9 +5,9 @@ import java.util.Scanner;
 public class RockPaperScissor {
 
     static Scanner scan = new Scanner(System.in);
-    int playerscore = 0;
-    int robotscore = 0;
-    int gameno = 0;
+    private int playerscore = 0;
+    private int robotscore = 0;
+    private int gameno = 0;
 
     public static void main(String[] args) {
         RockPaperScissor rockPaperScissor = new RockPaperScissor();
