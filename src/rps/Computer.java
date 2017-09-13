@@ -3,8 +3,14 @@ package rps;
 import utilities.GameMoves;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Computer {
+    private Scanner scan;
+    private String name;
+    Computer(String name){
+        this.name = name;
+    }
 
     /**
      * Randomly generates computer move based on defined moves in GameMoves
@@ -18,5 +24,9 @@ public class Computer {
         computerMove = String.valueOf(options[moveIndex]);
         System.out.println("Computer move is ...".concat(computerMove));
         return computerMove;
+    }
+
+    public String getName(){
+        return name;
     }
 }
