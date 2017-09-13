@@ -5,6 +5,9 @@ import java.util.Scanner;
 public class RockPaperScissor {
 
     static Scanner scan = new Scanner(System.in);
+    int playerscore = 0;
+    int robotscore = 0;
+    int gameno = 0;
 
     public static void main(String[] args) {
         RockPaperScissor rockPaperScissor = new RockPaperScissor();
@@ -50,19 +53,27 @@ public class RockPaperScissor {
         GameLogic gameLogic = new GameLogic();
         if (playerMove.equals(robotPlayerMove)) {
             System.out.println("It's a Tie!");
-        } else {
+        }
+        else {
             Boolean isPlayerWon = gameLogic.comparePlayerMoves(playerMove, robotPlayerMove);
             if (isPlayerWon) {
+                playerscore++;
                 System.out.println("You won the game!");
             } else {
+                robotscore++;
                 System.out.println("You lost the game!");
             }
         }
 
+        gameno ++;
         if (playAnotherGame()) {
             startPlayerVsComputerGame();
         } else {
             System.out.println("Game ended ....");
+            System.out.println("\nPrinting Results: \n");
+            System.out.println("Out of " + Integer.toString(gameno) + " games\n"
+                    + "You won " + Integer.toString(playerscore) + " games\n& "
+                    + "Computer won " + Integer.toString(robotscore)+ " games");
         }
 
     }
@@ -75,7 +86,7 @@ public class RockPaperScissor {
         String robotPlayer1Move = robotPlayer1.getMove();
         String robotPlayer2Move = robotPlayer2.getMove();
 
-        System.out.println("Game is on between " + robotPlayer1Name + " and " +  robotPlayer2Name);
+        System.out.println("Game is on between " + robotPlayer1Name + " and " + robotPlayer2Name);
         System.out.println("\n");
 //      determine winner between Computer & Computer
         GameLogic gameLogic = new GameLogic();
