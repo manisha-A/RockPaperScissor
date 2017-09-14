@@ -1,7 +1,5 @@
 package com;
 
-import utilities.GameMoves;
-
 import java.util.Scanner;
 
 
@@ -16,28 +14,23 @@ public class Player {
      * Prompts the player to input the Move
      * @return playerMove
      */
-    public String getMove() {
-        System.out.println("Enter your move!");
+    public GameMoves getMove() {
+        System.out.print("Enter your move : ");
         String input = scan.nextLine();
         return playerInput(input);
     }
 
-    public String playerInput(String playerInput){
+    public GameMoves playerInput(String playerInput){
         switch (playerInput) {
             case "Rock":
-                playerInput = String.valueOf(GameMoves.ROCK);
-                break;
+                return GameMoves.ROCK;
             case "Paper":
-                playerInput = String.valueOf(GameMoves.PAPER);
-                break;
+                return GameMoves.PAPER;
             case "Scissor":
-                playerInput = String.valueOf(GameMoves.SCISSOR);
-                break;
+                return GameMoves.SCISSOR;
             default:
                 System.out.println("Invalid move! Try again..");
                 return getMove();
         }
-        System.out.println("You played ...".concat(playerInput));
-        return playerInput;
     }
 }

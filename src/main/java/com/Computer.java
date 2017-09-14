@@ -1,7 +1,5 @@
 package com;
 
-import utilities.GameMoves;
-
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,13 +14,13 @@ public class Computer {
      * Randomly generates computer move based on defined moves in GameMoves
      * @return computermove
      */
-    public String getMove(){
-        String computerMove = null;
+    public GameMoves getMove(){
+        GameMoves computerMove = null;
         GameMoves[] options = GameMoves.values();
         Random index = new Random();
         int moveIndex = index.nextInt(GameMoves.values().length);
-        computerMove = String.valueOf(options[moveIndex]);
-        System.out.println("Computer move is ...".concat(computerMove));
+        computerMove = options[moveIndex];
+//        System.out.printf("Computer's move is %s\n",String.valueOf(computerMove));
         return computerMove;
     }
 
