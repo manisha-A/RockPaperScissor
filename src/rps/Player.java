@@ -1,13 +1,13 @@
 package rps;
-
 import utilities.GameMoves;
 
 import java.util.Scanner;
 
+
 public class Player {
     private Scanner scan;
 
-    Player() {
+    public Player() {
         scan = new Scanner(System.in);
     }
 
@@ -15,10 +15,13 @@ public class Player {
      * Prompts the player to input the Move
      * @return playerMove
      */
-    String getMove() {
+    public String getMove() {
         System.out.println("Enter your move!");
+        String input = scan.nextLine();
+        return playerInput(input);
+    }
 
-        String playerInput = scan.nextLine();
+    public String playerInput(String playerInput){
         switch (playerInput) {
             case "Rock":
                 playerInput = String.valueOf(GameMoves.ROCK);
