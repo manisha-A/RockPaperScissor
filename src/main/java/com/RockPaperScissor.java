@@ -1,5 +1,4 @@
-package rps;
-
+package com;
 import java.util.Scanner;
 
 public class RockPaperScissor {

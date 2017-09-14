@@ -1,7 +1,6 @@
-package test;
+package com;
 
 import org.junit.Test;
-import rps.Player;
 
 public class PlayerTest {
     @Test

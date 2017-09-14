@@ -1,4 +1,5 @@
-package rps;
+package com;
+
 import utilities.GameMoves;
 
 import java.util.Scanner;

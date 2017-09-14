@@ -1,4 +1,4 @@
-package rps;
+package com;
 
 import utilities.GameMoves;
 

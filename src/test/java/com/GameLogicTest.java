@@ -1,9 +1,6 @@
-package test;
+package com;
 
-import org.junit.Assert;
 import org.junit.Test;
-import rps.GameLogic;
-import rps.RockPaperScissor;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
