@@ -4,11 +4,6 @@ import java.util.Scanner;
 
 
 public class Player {
-    private Scanner scan;
-
-    public Player() {
-        scan = new Scanner(System.in);
-    }
 
     /**
      * Prompts the player to input the Move
@@ -18,6 +13,7 @@ public class Player {
     public GameMoves getMove() {
         try {
             System.out.print("Enter your move : ");
+            Scanner scan = new Scanner(System.in);;
             String input = scan.nextLine();
             return playerInput(input);
         } catch (IllegalArgumentException e) {
@@ -25,6 +21,12 @@ public class Player {
         }
     }
 
+    /**
+     * Returns Enum from UserInput
+     * @param playerInput
+     * @return
+     * @throws IllegalArgumentException
+     */
     public GameMoves playerInput(String playerInput) throws IllegalArgumentException {
         switch (playerInput) {
             case "Rock":

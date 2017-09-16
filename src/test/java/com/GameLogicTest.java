@@ -1,22 +1,37 @@
 package com;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.runners.statements.Fail;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.concurrent.ExecutionException;
+import java.util.Arrays;
 
-import static org.junit.Assert.*;
-import static org.junit.runner.Request.method;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class GameLogicTest {
 
+    GameLogic gl ;
+
+    @Before
+    public void beforeTest(){
+        gl = new GameLogic();
+    }
+
+    @Test
+    public void getComputerMoveTest() throws Exception{
+        Computer comp = new Computer("Test");
+        Method method = GameLogic.class.getDeclaredMethod("getComputerMove",Computer.class);
+        method.setAccessible(true);
+
+        assertTrue(Arrays.asList(GameMoves.values()).contains(method.invoke(gl,comp)));
+    }
+
     @Test
     public void continuePlayingTest() throws Exception{
-        GameLogic gl = new GameLogic();
         Method method = GameLogic.class.getDeclaredMethod("continuePlaying",String.class);
         method.setAccessible(true);
         Assert.assertTrue((Boolean) method.invoke(gl,"Y"));
@@ -24,7 +39,6 @@ public class GameLogicTest {
 
     @Test
     public void continuePlayingTestReturnFalse() throws Exception{
-        GameLogic gl = new GameLogic();
         Method method = GameLogic.class.getDeclaredMethod("continuePlaying",String.class);
         method.setAccessible(true);
         Assert.assertFalse((Boolean) method.invoke(gl,"N"));
@@ -33,7 +47,6 @@ public class GameLogicTest {
     @Test()
     public void printHorizontalException() throws Exception {
         try {
-            GameLogic gl = new GameLogic();
             Method method = GameLogic.class.getDeclaredMethod("printHorizontal",int.class);
             method.setAccessible(true);
             method.invoke(gl, -1);
@@ -47,7 +60,6 @@ public class GameLogicTest {
     @Test()
     public void compareMoveIllegalException() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         try {
-            GameLogic gl = new GameLogic();
             Method method = gl.getClass().getDeclaredMethod("comparePlayerMoves", int.class, String.class, String.class);
             method.setAccessible(true);
             method.invoke(gl, 2, "player1", "player2");
@@ -60,7 +72,6 @@ public class GameLogicTest {
 
     @Test()
     public void compareMovesForWinning() throws Exception {
-        GameLogic gl =new GameLogic();
         Field testPlayerScore = gl.getClass().getDeclaredField("playerscore");
         Field testComputerScore = gl.getClass().getDeclaredField("robotscore");
         Method method = gl.getClass().getDeclaredMethod("comparePlayerMoves", int.class, String.class, String.class);
@@ -74,7 +85,6 @@ public class GameLogicTest {
 
     @Test()
     public void compareMovesForTie() throws Exception {
-        GameLogic gl =new GameLogic();
         Field testPlayerScore = gl.getClass().getDeclaredField("playerscore");
         Field testComputerScore = gl.getClass().getDeclaredField("robotscore");
         testPlayerScore.setAccessible(true);
@@ -88,7 +98,6 @@ public class GameLogicTest {
 
     @Test()
     public void compareMovesForLosing() throws Exception {
-        GameLogic gl =new GameLogic();
         Field testPlayerScore = gl.getClass().getDeclaredField("playerscore");
         Field testComputerScore = gl.getClass().getDeclaredField("robotscore");
         testPlayerScore.setAccessible(true);
@@ -98,5 +107,15 @@ public class GameLogicTest {
         method.invoke(gl,-1,"player1","player2");
         Assert.assertEquals(0,testPlayerScore.getInt(gl));
         Assert.assertEquals(1,testComputerScore.getInt(gl));
+    }
+
+    @Test
+    public void getPlayerMovePaper() throws Exception{
+        Player pl = new Player();
+        String inputData = "Paper";
+        System.setIn(new java.io.ByteArrayInputStream(inputData.getBytes()));
+        Method method = gl.getClass().getDeclaredMethod("getPlayerMove", Player.class);
+        method.setAccessible(true);
+        assertEquals(GameMoves.PAPER, (GameMoves)method.invoke(gl,pl));
     }
 }
