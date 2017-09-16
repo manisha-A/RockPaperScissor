@@ -12,15 +12,20 @@ public class Player {
 
     /**
      * Prompts the player to input the Move
+     *
      * @return playerMove
      */
     public GameMoves getMove() {
-        System.out.print("Enter your move : ");
-        String input = scan.nextLine();
-        return playerInput(input);
+        try {
+            System.out.print("Enter your move : ");
+            String input = scan.nextLine();
+            return playerInput(input);
+        } catch (IllegalArgumentException e) {
+            return getMove();
+        }
     }
 
-    public GameMoves playerInput(String playerInput){
+    public GameMoves playerInput(String playerInput) throws IllegalArgumentException {
         switch (playerInput) {
             case "Rock":
                 return GameMoves.ROCK;
@@ -29,8 +34,8 @@ public class Player {
             case "Scissor":
                 return GameMoves.SCISSOR;
             default:
-                System.out.println("Invalid move! Try again..");
-                return getMove();
+                System.out.println("Invalid move! Please try again.");
+                throw new IllegalArgumentException("Invalid move! Please try again.");
         }
     }
 }

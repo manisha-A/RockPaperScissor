@@ -5,12 +5,16 @@ import org.junit.Test;
 
 public class PlayerTest {
     @Test
-    public void testPlayerInput(){
+    public void testPlayerInput() {
         Player player = new Player();
         Assert.assertEquals(player.playerInput("Rock"), GameMoves.ROCK);
         Assert.assertEquals(player.playerInput("Scissor"), GameMoves.SCISSOR);
-        Assert.assertEquals(player.playerInput("Rock"), GameMoves.ROCK);
-        assert player.playerInput("Scissor").compareTo(GameMoves.SCISSOR) == 0;
-        assert player.playerInput("Paper").compareTo(GameMoves.PAPER) == 0;
+        Assert.assertEquals(player.playerInput("Paper"), GameMoves.PAPER);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRandomPlayerInput() {
+        Player player = new Player();
+        player.playerInput("random");
     }
 }
