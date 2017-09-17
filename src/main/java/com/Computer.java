@@ -3,7 +3,7 @@ package com;
 import java.util.Random;
 
 public class Computer extends GamePlayer implements RPSPlayer{
-    private String name;
+//    private String gamePlayerName;
     Random index;
 
     static GameMove computerMove = null;
@@ -13,6 +13,15 @@ public class Computer extends GamePlayer implements RPSPlayer{
         super(name);
         index = new Random();
     }
+
+//    /**
+//     * Method to return Player's name
+//     *
+//     * @return gamePlayerName
+//     */
+//    public String getGamePlayerName() {
+//        return gamePlayerName;
+//    }
 
     /**
      * Randomly generates computer move based on defined moves in GameMove

@@ -7,12 +7,7 @@ public class GamePlayer {
         this.gamePlayerName = name;
     }
 
-    /**
-     * Method to return Player's name
-     *
-     * @return gamePlayerName
-     */
-    public String getGamePlayerName() {
+    public String getGamePlayerName(){
         return gamePlayerName;
     }
 }
