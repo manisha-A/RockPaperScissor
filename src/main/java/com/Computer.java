@@ -1,28 +1,26 @@
 package com;
 
 import java.util.Random;
-import java.util.Scanner;
 
-public class Computer {
+public class Computer extends GamePlayer implements RPSPlayer{
     private String name;
-    Computer(String name){
-        this.name = name;
+    Random index;
+
+    static GameMove computerMove = null;
+    GameMove[] options = GameMove.values();
+
+    Computer(String name) {
+        super(name);
+        index = new Random();
     }
 
     /**
-     * Randomly generates computer move based on defined moves in GameMoves
+     * Randomly generates computer move based on defined moves in GameMove
      * @return computermove
      */
-    public GameMoves getMove(){
-        GameMoves computerMove = null;
-        GameMoves[] options = GameMoves.values();
-        Random index = new Random();
-        int moveIndex = index.nextInt(GameMoves.values().length);
+    public GameMove getMove(){
+        int moveIndex = index.nextInt(GameMove.values().length);
         computerMove = options[moveIndex];
         return computerMove;
-    }
-
-    public String getName(){
-        return name;
     }
 }

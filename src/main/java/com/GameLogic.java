@@ -1,13 +1,16 @@
 package com;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Scanner;
 
-public class GameLogic{
+public class GameLogic {
     private Scanner scan = new Scanner(System.in);
     private int playerscore = 0;
     private int robotscore = 0;
     private int gameno = 0;
+    private String COMP_PLAYER_NAME = "TheMightyPlayer";
+    private String COMP_PLAYER_1 = "Alpha";
+    private String COMP_PLAYER_2 = "Beta";
+    private String HUMAN_PLAYER = "Lord of Intelligence";
 
     /**
      * Method to prompt player whether or not she wants to play
@@ -28,10 +31,10 @@ public class GameLogic{
             int choice = scan.nextInt();
             switch (choice) {
                 case 1:
-                    this.startPlayerVsComputerGame(new Player(),new Computer("TheMightyPlayer"));
+                    this.startPlayerVsComputerGame(new Player(HUMAN_PLAYER), new Computer(COMP_PLAYER_NAME));
                     break;
                 case 2:
-                    this.startComputerVsComputerGame(new Computer("Alpha"),new Computer("Beta"));
+                    this.startComputerVsComputerGame(new Computer(COMP_PLAYER_1), new Computer(COMP_PLAYER_2));
                     break;
                 default:
                     printHorizontal(50);
@@ -44,35 +47,35 @@ public class GameLogic{
         }
     }
 
-    private void startPlayerVsComputerGame(Player player1,Computer robotPlayer) {
+    private void startPlayerVsComputerGame(Player player1, Computer robotPlayer) {
         //      determine winner between Player & Computer
-        comparePlayerMoves(getPlayerMove(player1).compareMoves(getComputerMove(robotPlayer)), "Manisha", robotPlayer.getName());
+        comparePlayerMoves(getPlayerMove(player1).compareMoves(getComputerMove(robotPlayer)), player1.getGamePlayerName(), robotPlayer.getGamePlayerName());
 
         gameno++;
         if (playAnotherGame()) {
-            startPlayerVsComputerGame(player1,robotPlayer);
+            startPlayerVsComputerGame(player1, robotPlayer);
         } else {
-            finalResults(gameno, playerscore, robotscore, "Manisha", robotPlayer.getName());
+            finalResults(gameno, playerscore, robotscore, player1.getGamePlayerName(), robotPlayer.getGamePlayerName());
         }
     }
 
-    private GameMoves getPlayerMove(Player pl) {
-        GameMoves playerMove = pl.getMove();
+    private GameMove getPlayerMove(Player pl) {
+        GameMove playerMove = pl.getMove();
         printHorizontal(50);
         System.out.printf("\nYou played %s\n", String.valueOf(playerMove));
         return playerMove;
     }
 
-    private GameMoves getComputerMove(Computer comp) {
-        GameMoves robotPlayerMove = comp.getMove();
+    private GameMove getComputerMove(Computer comp) {
+        GameMove robotPlayerMove = comp.getMove();
         printHorizontal(50);
         System.out.printf("\nComputer played %s\n", String.valueOf(robotPlayerMove));
         return robotPlayerMove;
     }
 
-    private void startComputerVsComputerGame(Computer robotPlayer1,Computer robotPlayer2) {
-        String robotPlayer1Name = robotPlayer1.getName();
-        String robotPlayer2Name = robotPlayer2.getName();
+    private void startComputerVsComputerGame(Computer robotPlayer1, Computer robotPlayer2) {
+        String robotPlayer1Name = robotPlayer1.getGamePlayerName();
+        String robotPlayer2Name = robotPlayer2.getGamePlayerName();
 
         System.out.printf("Game is on between %s and %s \n", robotPlayer1Name, robotPlayer2Name);
         System.out.printf("%s's move is %s\n", robotPlayer1Name, String.valueOf(getComputerMove(robotPlayer1)));
@@ -83,7 +86,7 @@ public class GameLogic{
         gameno++;
         boolean nextGame = playAnotherGame();
         if (nextGame) {
-            startComputerVsComputerGame(robotPlayer1,robotPlayer2);
+            startComputerVsComputerGame(robotPlayer1, robotPlayer2);
         } else {
             finalResults(gameno, playerscore, robotscore, robotPlayer1Name, robotPlayer2Name);
         }
@@ -126,10 +129,11 @@ public class GameLogic{
 
     /**
      * Utility method to print horizontal line on command line
+     *
      * @param number
      * @throws NegativeArraySizeException
      */
-    private void printHorizontal(int number) throws NegativeArraySizeException{
+    private void printHorizontal(int number) throws NegativeArraySizeException {
         int[] array = new int[number];
 
         for (int i = 0; i < array.length; i++) {
@@ -137,7 +141,7 @@ public class GameLogic{
         }
     }
 
-    private void comparePlayerMoves(int moveComparison, String player1, String player2) throws IllegalArgumentException{
+    private void comparePlayerMoves(int moveComparison, String player1, String player2) throws IllegalArgumentException {
         switch (moveComparison) {
             case 0:
                 printHorizontal(50);
@@ -160,6 +164,7 @@ public class GameLogic{
 
     /**
      * Method to print result outcome on command line
+     *
      * @param totalGames
      * @param player1score
      * @param player2score
@@ -167,7 +172,7 @@ public class GameLogic{
      * @param anotherplayer
      * @throws IllegalArgumentException
      */
-    private void finalResults(int totalGames, int player1score, int player2score, String player, String anotherplayer) throws IllegalArgumentException{
+    private void finalResults(int totalGames, int player1score, int player2score, String player, String anotherplayer) throws IllegalArgumentException {
         printHorizontal(50);
         System.out.println("\nGame ended ....");
         printHorizontal(50);

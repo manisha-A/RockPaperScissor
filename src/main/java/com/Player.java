@@ -3,14 +3,17 @@ package com;
 import java.util.Scanner;
 
 
-public class Player {
+public class Player extends GamePlayer implements RPSPlayer{
+    Player(String name){
+        super(name);
+    }
 
     /**
      * Prompts the player to input the Move
      *
      * @return playerMove
      */
-    public GameMoves getMove() {
+    public GameMove getMove() {
         try {
             System.out.print("Enter your move : ");
             Scanner scan = new Scanner(System.in);;
@@ -27,14 +30,14 @@ public class Player {
      * @return
      * @throws IllegalArgumentException
      */
-    public GameMoves playerInput(String playerInput) throws IllegalArgumentException {
+    public GameMove playerInput(String playerInput) throws IllegalArgumentException {
         switch (playerInput) {
             case "Rock":
-                return GameMoves.ROCK;
+                return GameMove.ROCK;
             case "Paper":
-                return GameMoves.PAPER;
+                return GameMove.PAPER;
             case "Scissor":
-                return GameMoves.SCISSOR;
+                return GameMove.SCISSOR;
             default:
                 System.out.println("Invalid move! Please try again.");
                 throw new IllegalArgumentException("Invalid move! Please try again.");

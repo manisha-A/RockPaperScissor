@@ -27,7 +27,7 @@ public class GameLogicTest {
         Method method = GameLogic.class.getDeclaredMethod("getComputerMove",Computer.class);
         method.setAccessible(true);
 
-        assertTrue(Arrays.asList(GameMoves.values()).contains(method.invoke(gl,comp)));
+        assertTrue(Arrays.asList(GameMove.values()).contains(method.invoke(gl,comp)));
     }
 
     @Test
@@ -111,11 +111,11 @@ public class GameLogicTest {
 
     @Test
     public void getPlayerMovePaper() throws Exception{
-        Player pl = new Player();
+        Player pl = new Player("Human");
         String inputData = "Paper";
         System.setIn(new java.io.ByteArrayInputStream(inputData.getBytes()));
         Method method = gl.getClass().getDeclaredMethod("getPlayerMove", Player.class);
         method.setAccessible(true);
-        assertEquals(GameMoves.PAPER, (GameMoves)method.invoke(gl,pl));
+        assertEquals(GameMove.PAPER, (GameMove)method.invoke(gl,pl));
     }
 }

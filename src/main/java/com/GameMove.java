@@ -1,9 +1,9 @@
 package com;
 
-public enum GameMoves {
+public enum GameMove {
     ROCK,PAPER,SCISSOR;
 
-    public int compareMoves(GameMoves move){
+    public int compareMoves(GameMove move){
         if(this == move){
             return 0;
         }

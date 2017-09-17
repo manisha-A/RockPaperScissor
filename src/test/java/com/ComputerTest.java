@@ -1,6 +1,5 @@
 package com;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,13 +17,11 @@ public class ComputerTest {
 
     @Test
     public void getComputerName(){
-
-        assertTrue(c.getName().contains("testing 123"));
+        assertTrue(c.getGamePlayerName().equals("testing 123"));
     }
-
 
     @Test
     public void getComputerMoveTest(){
-        assertTrue(Arrays.asList(GameMoves.values()).contains(c.getMove()));
+        assertTrue(Arrays.asList(GameMove.values()).contains(c.getMove()));
     }
 }
